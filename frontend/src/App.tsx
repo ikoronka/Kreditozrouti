@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import Button from './components/Button'
-import Dropdown from './components/Dropdown'
+import DropdownDay from './components/DropdownDay'
 import ListItem from './components/ListItem'
 import './App.css'
 import Time from './components/Time'
+import DropdownFaculty from "./components/DropdownFaculty.tsx";
 
 type Timetable = {
   day: string
@@ -41,6 +42,7 @@ function hhmmToMinutes(s: string): number {
 
 function App() {
   const [day, setDay] = useState<string>('Pondělí')
+    const [faculty, setFaculty] = useState<string | undefined>(undefined)
   const [from, setFrom] = useState<number>(540) // 9 * 60 = 540 minutes (09:00)
   const [to, setTo] = useState<number>(720) // 12 * 60 = 720 minutes (12:00)
   const [courses, setCourses] = useState<Course[]>([])
@@ -51,7 +53,8 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const body = { day, from, to }
+        const faculty2 = faculty === '0' ? undefined : faculty
+      const body = { day, from, to, faculty: faculty2 }
       console.log('Sending JSON body:', body)
       const res = await fetch('http://localhost:6767/subjects/find', {
         method: 'POST',
@@ -76,7 +79,7 @@ function App() {
       <header className="controls-row">
         <div className='input-pill'>
         <div className="input-wrapper">
-          <Dropdown value={day as any} onChange={(v) => setDay(v as string)} />
+          <DropdownDay value={day as any} onChange={(v) => setDay(v as string)} />
         </div>
         </div>
 
@@ -93,6 +96,12 @@ function App() {
             onChange={(val) => setTo(hhmmToMinutes(val))}
           />
         </div>
+
+          <div className='input-pill'>
+              <div className="input-wrapper">
+                  <DropdownFaculty value={day as any} onChange={(v) => setFaculty(v as (string | undefined))}/>
+              </div>
+          </div>
 
         <div className="enter-wrap">
           <Button className="enter-btn" onClick={handleSearch} disabled={loading}>

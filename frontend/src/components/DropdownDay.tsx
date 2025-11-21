@@ -9,7 +9,7 @@ interface DropdownProps {
     className?: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ value, onChange, id, className }) => {
+const DropdownDay: React.FC<DropdownProps> = ({ value, onChange, id, className }) => {
     const [selected, setSelected] = useState<Day>(value ?? "Pondělí");
 
     // Keep internal selection synced if parent provides a value
@@ -40,4 +40,4 @@ const Dropdown: React.FC<DropdownProps> = ({ value, onChange, id, className }) =
     );
 };
 
-export default Dropdown;
+export default DropdownDay;
