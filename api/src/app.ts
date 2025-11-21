@@ -20,7 +20,7 @@ app.options('/{*any}', cors(corsOptions)) // include before other routes
 
 app.use(
     cors({
-        ...corsOptions,
+        origin: config.allowedOrigins,
         credentials: true
     })
 )
