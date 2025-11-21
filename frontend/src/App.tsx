@@ -40,7 +40,7 @@ function hhmmToMinutes(s: string): number {
 }
 
 function App() {
-  const [day, setDay] = useState<string>('Po')
+  const [day, setDay] = useState<string>('Pondělí')
   const [from, setFrom] = useState<number>(540) // 9 * 60 = 540 minutes (09:00)
   const [to, setTo] = useState<number>(720) // 12 * 60 = 720 minutes (12:00)
   const [courses, setCourses] = useState<Course[]>([])
@@ -52,6 +52,7 @@ function App() {
     setError(null)
     try {
       const body = { day, from, to }
+      console.log('Sending JSON body:', body)
       const res = await fetch('http://localhost:6767/subjects/find', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -59,7 +60,8 @@ function App() {
       })
       if (!res.ok) throw new Error(`Request failed: ${res.status}`)
       const data = await res.json()
-      setCourses(Array.isArray(data) ? data : [])
+      console.log('Response data:', data)
+      setCourses(Array.isArray(data?.subjects) ? data.subjects : [])
     } catch (err: any) {
       setError(err?.message ?? String(err))
       setCourses([])

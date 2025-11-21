@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type Day = "Po" | "Út" | "St" | "Čt" | "Pá";
+type Day = "Pondělí" | "Úterý" | "Středa" | "Čtvrtek" | "Pátek";
 
 interface DropdownProps {
     value?: Day;
@@ -10,7 +10,7 @@ interface DropdownProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ value, onChange, id, className }) => {
-    const [selected, setSelected] = useState<Day>(value ?? "Po");
+    const [selected, setSelected] = useState<Day>(value ?? "Pondělí");
 
     // Keep internal selection synced if parent provides a value
     React.useEffect(() => {
@@ -31,11 +31,11 @@ const Dropdown: React.FC<DropdownProps> = ({ value, onChange, id, className }) =
             onChange={handleChange}
             aria-label="Vyberte den"
         >
-            <option value="Po">Po</option>
-            <option value="Út">Út</option>
-            <option value="St">St</option>
-            <option value="Čt">Čt</option>
-            <option value="Pá">Pá</option>
+            <option value="Pondělí">Pondělí</option>
+            <option value="Úterý">Út</option>
+            <option value="Středa">St</option>
+            <option value="Čtvrtek">Čt</option>
+            <option value="Pátek">Pá</option>
         </select>
     );
 };
