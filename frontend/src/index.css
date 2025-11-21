@@ -25,9 +25,10 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: stretch;
   min-width: 320px;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 h1 {
@@ -70,13 +71,26 @@ button:focus-visible {
 /* App layout */
 .layout {
   width: 100%;
-  max-width: 960px;
-  margin: 48px auto;
-  padding: 24px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header.controls-row {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #242424;
+  padding: 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  header.controls-row {
+    background: #ffffff;
+  }
 }
 
 .top-row {
@@ -84,6 +98,9 @@ button:focus-visible {
   grid-template-columns: 180px 1fr 1fr 120px;
   gap: 16px;
   align-items: end;
+  padding: 24px;
+  box-sizing: border-box;
+  background: inherit;
 }
 
 .day-dropdown {
@@ -116,19 +133,26 @@ button:focus-visible {
 /* Bottom list */
 .bottom-row {
   display: block;
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .bottom-list {
   list-style: none;
   display: flex;
+  flex-direction: column;
   gap: 16px;
   padding: 0;
   margin: 0;
-  justify-content: space-between;
 }
 
 .bottom-list > * {
-  flex: 1 1 0;
+  flex: 1 1 auto;
 }
 
 /* Make each list item look like a card */
