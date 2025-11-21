@@ -40,3 +40,90 @@
 .read-the-docs {
   color: #888;
 }
+
+
+
+/*Od gemini*/
+
+/* General Page Layout - Center everything */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Or your preferred font */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px; /* Space between Title and Controls */
+}
+
+/* Typography */
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #000;
+  margin: 0;
+}
+
+/* Row containing Pill + Button */
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The Grey Pill Container */
+.input-pill {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 50px; /* Makes it pill-shaped */
+  gap: 12px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* --- Generic Overrides for children --- 
+   Since I don't have the code for Dropdown/Time, 
+   these selectors try to style standard HTML inputs inside them 
+   to look like white bubbles.
+*/
+
+.input-pill select,
+.input-pill input {
+  border: none;
+  background-color: #888;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  color: #000;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+/* Hide the labels "Hours" and "Minutes" if they are just text nodes 
+   Note: This might be tricky without seeing Time.tsx code, 
+   but this aligns things flex-wise */
+.input-wrapper {
+  color: transparent; /* Hides text labels if they are loose text */
+}
+.input-wrapper input, 
+.input-wrapper select {
+  color: #000; /* Keeps input text visible */
+}
+
+/* Button Override */
+.search-btn {
+  border-radius: 20px !important; /* Match the rounded aesthetic */
+  height: 56px; /* Match height of the pill roughly */
+}

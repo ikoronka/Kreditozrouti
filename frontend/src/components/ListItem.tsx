@@ -36,7 +36,6 @@ export const ListItem = ({
           </span>
         </div>
       </div>
-
     </div>
   );
 };
