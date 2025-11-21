@@ -13,14 +13,28 @@ const app = express()
 
 const corsOptions: CorsOptions = {
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-    origin: Config.allowedOrigins
+    origin: Config.allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }
 
-app.options('/{*any}', cors(corsOptions)) // include before other routes
+// Handle preflight (OPTIONS) for all routes
+// Use a path pattern accepted by the router/path-to-regexp package
+// (bare '*' can raise "Missing parameter name" in some versions)
+// Handle preflight (OPTIONS) for all routes without registering a route
+// (avoids path-to-regexp errors when using wildcard route strings)
+app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        return cors(corsOptions)(req, res, next)
+    }
 
+    return next()
+})
+
+// Use the same options but enable credentials for non-preflight requests
 app.use(
     cors({
-        origin: Config.allowedOrigins,
+        ...corsOptions,
         credentials: true
     })
 )
