@@ -60,6 +60,11 @@ async function scrapeSubjectDetails() {
     const results = [];
     console.log(`Nalezeno ${subjectsList.length} předmětů ke zpracování.`);
 
+    const fileName = 'subject_details.json';
+
+    fs.writeFileSync(fileName, '[]', 'utf8');
+    console.log(`Inicializuji výstupní soubor ${fileName}`);
+
     // 2. Iterace přes každý předmět
     for (const [index, item] of subjectsList.entries()) {
         const url = item.url;
@@ -174,12 +179,27 @@ async function scrapeSubjectDetails() {
         }
 
         // Pauza 1 sekunda mezi požadavky, abychom nebyli podezřelí
-        await sleep(1000);
+        await sleep(1);
+
+        if (results.length > 10) {
+            const fileData = fs.readFileSync(fileName, 'utf8');
+            const existingResults = JSON.parse(fileData);
+            const allResults = existingResults.concat(results);
+            fs.writeFileSync(fileName, JSON.stringify(allResults, null, 2), 'utf8');
+            console.log(`Průběžně ukládám data do ${fileName}`);
+            results.length = 0; // Vyprázdnění pole výsledků
+        }
     }
 
+    const fileData = fs.readFileSync(fileName, 'utf8');
+    const existingResults = JSON.parse(fileData);
+    const allResults = existingResults.concat(results);
+    fs.writeFileSync(fileName, JSON.stringify(allResults, null, 2), 'utf8');
+    console.log(`Finálně ukládám data do subject_details_part_final.json`);
+
     // 3. Uložení výsledků
-    fs.writeFileSync('subject_details.json', JSON.stringify(results, null, 2), 'utf8');
-    console.log('Hotovo. Data uložena do subject_details.json');
+    // fs.writeFileSync('subject_details.json', JSON.stringify(results, null, 2), 'utf8');
+    // console.log('Hotovo. Data uložena do subject_details.json');
 }
 
 scrapeSubjectDetails();
