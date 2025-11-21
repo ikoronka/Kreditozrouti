@@ -5,8 +5,11 @@ const fs = require('fs');
 async function scrapeInsisCatalog() {
     const url = 'https://insis.vse.cz/katalog/index.pl';
 
-    // The exact form data from your request
-    const formData = 'kredity_od=&kredity_do=&fakulta=31140&obdobi=381&obdobi_fak=1186&vyhledat_rozsirene=Vyhledat+p%C5%99edm%C4%9Bty&jak=rozsirene';
+    // jenom FIS
+    // const formData = 'kredity_od=&kredity_do=&fakulta=31140&obdobi=381&obdobi_fak=1186&vyhledat_rozsirene=Vyhledat+p%C5%99edm%C4%9Bty&jak=rozsirene';
+
+    // Vsechny fakulty
+    const formData = 'kredity_od=&kredity_do=&obdobi=381&obdobi_fak=1314&obdobi_fak=1418&obdobi_fak=1458&obdobi_fak=1455&obdobi_fak=1333&obdobi_fak=1430&obdobi_fak=1471&obdobi_fak=1428&obdobi_fak=1415&obdobi_fak=1452&obdobi_fak=1419&obdobi_fak=1451&obdobi_fak=1379&obdobi_fak=1460&obdobi_fak=1456&obdobi_fak=1454&obdobi_fak=1473&obdobi_fak=1157&obdobi_fak=1153&obdobi_fak=1155&obdobi_fak=1363&obdobi_fak=1177&obdobi_fak=1463&obdobi_fak=1373&obdobi_fak=1224&obdobi_fak=1159&obdobi_fak=1212&obdobi_fak=1197&obdobi_fak=1194&obdobi_fak=1186&obdobi_fak=1199&obdobi_fak=1264&obdobi_fak=1417&vyhledat_rozsirene=Vyhledat+p%C5%99edm%C4%9Bty&jak=rozsirene';
 
     // Headers matching your specific request to ensure access
     const config = {
