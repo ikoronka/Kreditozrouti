@@ -23,8 +23,10 @@ const config: Config = {
     // In production, you likely need the real domain here, not localhost
     domain: process.env.RAILWAY_STATIC_URL || 'localhost',
     
-    // Allow your specific frontend URL (you will need to set this env var in Railway)
-    allowedOrigins: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ['http://localhost:5173'],
+    allowedOrigins: [
+        'http://localhost:5173',
+        'https://enthusiastic-sparkle-production-0d2d.up.railway.app' 
+    ],
     
     sessionSecret: process.env.SESSION_SECRET || 'development',
 
