@@ -169,3 +169,24 @@ header.controls-row {
   .bottom-list { flex-direction: column; }
 }
 
+/* ListItem hover interaction */
+.listitem {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  transform-origin: center;
+  cursor: pointer;
+}
+.listitem:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.24);
+}
+.listitem-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+.listitem-ident { margin-right: 12px; }
+
+

@@ -18,6 +18,7 @@ type Course = {
   name: string
   ects: number
   year: string
+  url?: string
   timetable: Timetable[][]
 }
 
@@ -114,7 +115,7 @@ function App() {
         {error && <div style={{ color: 'salmon' }}>{error}</div>}
         <ul className="bottom-list">
           {courses.map((c) => (
-            <ListItem key={c.ident} ident={c.ident} name={c.name} ects={c.ects} year={c.year} />
+            <ListItem key={c.ident} ident={c.ident} name={c.name} ects={c.ects} year={c.year} url={c.url} />
           ))}
         </ul>
       </main>

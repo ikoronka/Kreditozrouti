@@ -58,7 +58,8 @@ body, html, #root {
 .app-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+  overflow: hidden;
   gap: 24px; /* Space between Title and Controls */
 }
 
