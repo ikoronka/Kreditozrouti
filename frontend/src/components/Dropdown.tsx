@@ -12,6 +12,11 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ value, onChange, id, className }) => {
     const [selected, setSelected] = useState<Day>(value ?? "Po");
 
+    // Keep internal selection synced if parent provides a value
+    React.useEffect(() => {
+        if (typeof value !== "undefined") setSelected(value);
+    }, [value]);
+
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const val = e.target.value as Day;
         setSelected(val);
