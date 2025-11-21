@@ -60,7 +60,7 @@ function App() {
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const API_URL = isLocal 
         ? 'http://localhost:6767' 
-        : 'https://YOUR-API-NAME.up.railway.app';
+        : 'https://kreditozrouti-production.up.railway.app';
       
       // 2. Use it in your fetch
       const res = await fetch(`${API_URL}/subjects/find`, {
