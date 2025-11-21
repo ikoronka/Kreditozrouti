@@ -43,7 +43,7 @@ function hhmmToMinutes(s: string): number {
 
 function App() {
   const [day, setDay] = useState<string>('Pondělí')
-    const [faculty, setFaculty] = useState<string | undefined>(undefined)
+  const [faculty, setFaculty] = useState<string | undefined>(undefined)
   const [from, setFrom] = useState<number>(540) // 9 * 60 = 540 minutes (09:00)
   const [to, setTo] = useState<number>(720) // 12 * 60 = 720 minutes (12:00)
   const [courses, setCourses] = useState<Course[]>([])
@@ -57,7 +57,13 @@ function App() {
         const faculty2 = faculty === '0' ? undefined : faculty
       const body = { day, from, to, faculty: faculty2 }
       console.log('Sending JSON body:', body)
-      const res = await fetch('http://localhost:6767/subjects/find', {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const API_URL = isLocal 
+        ? 'http://localhost:6767' 
+        : 'https://YOUR-API-NAME.up.railway.app';
+      
+      // 2. Use it in your fetch
+      const res = await fetch(`${API_URL}/subjects/find`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
