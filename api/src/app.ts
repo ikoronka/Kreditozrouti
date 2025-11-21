@@ -8,6 +8,7 @@ import session, { type SessionOptions } from 'express-session'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import responseTime from 'response-time'
+import { Request, Response, NextFunction } from 'express'
 
 const app = express()
 
@@ -23,7 +24,7 @@ const corsOptions: CorsOptions = {
 // (bare '*' can raise "Missing parameter name" in some versions)
 // Handle preflight (OPTIONS) for all routes without registering a route
 // (avoids path-to-regexp errors when using wildcard route strings)
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     if (req.method === 'OPTIONS') {
         return cors(corsOptions)(req, res, next)
     }

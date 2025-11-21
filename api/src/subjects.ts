@@ -37,12 +37,23 @@ export const loadSubjectsData = (): void => {
         // Try multiple candidate locations for subjects.json so the loader
         // works in development (src/) and production after `tsc` (dist/).
         const candidates = [
-            path.join(process.cwd(), 'src', 'data', 'subjects.json'), // dev
-            path.join(process.cwd(), 'dist', 'src', 'data', 'subjects.json'), // built with dist/src
-            path.join(process.cwd(), 'dist', 'data', 'subjects.json'), // alternate build layout
-            path.join(process.cwd(), 'src', 'data', 'subjects.json'), // fallback
-            path.join(__dirname, 'data', 'subjects.json'), // when running from dist/src
-            path.join(__dirname, '..', 'src', 'data', 'subjects.json'),
+            // Development layout (project root)
+            path.join(process.cwd(), 'src', 'Data', 'subjects.json'),
+            path.join(process.cwd(), 'src', 'data', 'subjects.json'),
+
+            // Built layouts (dist)
+            path.join(process.cwd(), 'dist', 'src', 'Data', 'subjects.json'),
+            path.join(process.cwd(), 'dist', 'src', 'data', 'subjects.json'),
+            path.join(process.cwd(), 'dist', 'Data', 'subjects.json'),
+            path.join(process.cwd(), 'dist', 'data', 'subjects.json'),
+
+            // When running from compiled files (__dirname points into dist/src)
+            path.join(__dirname, 'data', 'subjects.json'),
+            path.join(__dirname, 'Data', 'subjects.json'),
+            path.join(__dirname, '..', 'data', 'subjects.json'),
+            path.join(__dirname, '..', 'Data', 'subjects.json'),
+
+            // Fallbacks
             path.join(process.cwd(), 'data', 'subjects.json')
         ]
 
