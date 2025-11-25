@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/index.ts",
-        "build": "tsc && tsc-alias",
+        "build": "tsc && tsc-alias && cpx \"src/Data/**/*\" dist/src/Data",
         "lint": "eslint ./src --ext .ts,.js",
         "format": "prettier --write .",
         "preview": "node dist/src/index.js",
@@ -48,6 +48,7 @@
         "tsconfig-paths": "^4.2.0",
         "tsx": "^4.20.6",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.45.0"
+        "typescript-eslint": "^8.45.0",
+        "cpx": "^1.5.0"
     }
 }
